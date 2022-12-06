@@ -19,36 +19,32 @@ import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { CreateProductArgs } from "./CreateProductArgs";
-import { UpdateProductArgs } from "./UpdateProductArgs";
-import { DeleteProductArgs } from "./DeleteProductArgs";
-import { ProductFindManyArgs } from "./ProductFindManyArgs";
-import { ProductFindUniqueArgs } from "./ProductFindUniqueArgs";
-import { Product } from "./Product";
-import { DiscountFindManyArgs } from "../../discount/base/DiscountFindManyArgs";
-import { Discount } from "../../discount/base/Discount";
-import { KitFindManyArgs } from "../../kit/base/KitFindManyArgs";
-import { Kit } from "../../kit/base/Kit";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
-import { ProductService } from "../product.service";
+import { CreateKitArgs } from "./CreateKitArgs";
+import { UpdateKitArgs } from "./UpdateKitArgs";
+import { DeleteKitArgs } from "./DeleteKitArgs";
+import { KitFindManyArgs } from "./KitFindManyArgs";
+import { KitFindUniqueArgs } from "./KitFindUniqueArgs";
+import { Kit } from "./Kit";
+import { ProductFindManyArgs } from "../../product/base/ProductFindManyArgs";
+import { Product } from "../../product/base/Product";
+import { KitService } from "../kit.service";
 
-@graphql.Resolver(() => Product)
+@graphql.Resolver(() => Kit)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
-export class ProductResolverBase {
+export class KitResolverBase {
   constructor(
-    protected readonly service: ProductService,
+    protected readonly service: KitService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "read",
     possession: "any",
   })
-  async _productsMeta(
-    @graphql.Args() args: ProductFindManyArgs
+  async _kitsMeta(
+    @graphql.Args() args: KitFindManyArgs
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -61,28 +57,24 @@ export class ProductResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.Query(() => [Product])
+  @graphql.Query(() => [Kit])
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "read",
     possession: "any",
   })
-  async products(
-    @graphql.Args() args: ProductFindManyArgs
-  ): Promise<Product[]> {
+  async kits(@graphql.Args() args: KitFindManyArgs): Promise<Kit[]> {
     return this.service.findMany(args);
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.Query(() => Product, { nullable: true })
+  @graphql.Query(() => Kit, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "read",
     possession: "own",
   })
-  async product(
-    @graphql.Args() args: ProductFindUniqueArgs
-  ): Promise<Product | null> {
+  async kit(@graphql.Args() args: KitFindUniqueArgs): Promise<Kit | null> {
     const result = await this.service.findOne(args);
     if (result === null) {
       return null;
@@ -91,15 +83,13 @@ export class ProductResolverBase {
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @graphql.Mutation(() => Product)
+  @graphql.Mutation(() => Kit)
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "create",
     possession: "any",
   })
-  async createProduct(
-    @graphql.Args() args: CreateProductArgs
-  ): Promise<Product> {
+  async createKit(@graphql.Args() args: CreateKitArgs): Promise<Kit> {
     return await this.service.create({
       ...args,
       data: args.data,
@@ -107,15 +97,13 @@ export class ProductResolverBase {
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @graphql.Mutation(() => Product)
+  @graphql.Mutation(() => Kit)
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "update",
     possession: "any",
   })
-  async updateProduct(
-    @graphql.Args() args: UpdateProductArgs
-  ): Promise<Product | null> {
+  async updateKit(@graphql.Args() args: UpdateKitArgs): Promise<Kit | null> {
     try {
       return await this.service.update({
         ...args,
@@ -131,15 +119,13 @@ export class ProductResolverBase {
     }
   }
 
-  @graphql.Mutation(() => Product)
+  @graphql.Mutation(() => Kit)
   @nestAccessControl.UseRoles({
-    resource: "Product",
+    resource: "Kit",
     action: "delete",
     possession: "any",
   })
-  async deleteProduct(
-    @graphql.Args() args: DeleteProductArgs
-  ): Promise<Product | null> {
+  async deleteKit(@graphql.Args() args: DeleteKitArgs): Promise<Kit | null> {
     try {
       return await this.service.delete(args);
     } catch (error) {
@@ -153,57 +139,17 @@ export class ProductResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Discount])
+  @graphql.ResolveField(() => [Product])
   @nestAccessControl.UseRoles({
-    resource: "Discount",
+    resource: "Product",
     action: "read",
     possession: "any",
   })
-  async discounts(
-    @graphql.Parent() parent: Product,
-    @graphql.Args() args: DiscountFindManyArgs
-  ): Promise<Discount[]> {
-    const results = await this.service.findDiscounts(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Kit])
-  @nestAccessControl.UseRoles({
-    resource: "Kit",
-    action: "read",
-    possession: "any",
-  })
-  async kits(
-    @graphql.Parent() parent: Product,
-    @graphql.Args() args: KitFindManyArgs
-  ): Promise<Kit[]> {
-    const results = await this.service.findKits(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Order])
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "any",
-  })
-  async orders(
-    @graphql.Parent() parent: Product,
-    @graphql.Args() args: OrderFindManyArgs
-  ): Promise<Order[]> {
-    const results = await this.service.findOrders(parent.id, args);
+  async product(
+    @graphql.Parent() parent: Kit,
+    @graphql.Args() args: ProductFindManyArgs
+  ): Promise<Product[]> {
+    const results = await this.service.findProduct(parent.id, args);
 
     if (!results) {
       return [];

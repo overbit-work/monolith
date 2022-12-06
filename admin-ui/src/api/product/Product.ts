@@ -1,4 +1,5 @@
 import { Discount } from "../discount/Discount";
+import { Kit } from "../kit/Kit";
 import { Order } from "../order/Order";
 
 export type Product = {
@@ -7,6 +8,7 @@ export type Product = {
   discounts?: Array<Discount>;
   id: string;
   itemPrice: number | null;
+  kits?: Array<Kit>;
   name: string | null;
   orders?: Array<Order>;
   updatedAt: Date;

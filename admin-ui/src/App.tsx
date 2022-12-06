@@ -49,6 +49,10 @@ import { PromotionList } from "./promotion/PromotionList";
 import { PromotionCreate } from "./promotion/PromotionCreate";
 import { PromotionEdit } from "./promotion/PromotionEdit";
 import { PromotionShow } from "./promotion/PromotionShow";
+import { KitList } from "./kit/KitList";
+import { KitCreate } from "./kit/KitCreate";
+import { KitEdit } from "./kit/KitEdit";
+import { KitShow } from "./kit/KitShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -151,6 +155,13 @@ const App = (): React.ReactElement => {
           edit={PromotionEdit}
           create={PromotionCreate}
           show={PromotionShow}
+        />
+        <Resource
+          name="Kit"
+          list={KitList}
+          edit={KitEdit}
+          create={KitCreate}
+          show={KitShow}
         />
       </Admin>
     </div>

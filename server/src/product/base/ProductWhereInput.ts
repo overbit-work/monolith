@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { DiscountListRelationFilter } from "../../discount/base/DiscountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { KitListRelationFilter } from "../../kit/base/KitListRelationFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
 @InputType()
 class ProductWhereInput {
@@ -64,6 +65,18 @@ class ProductWhereInput {
     nullable: true,
   })
   itemPrice?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => KitListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => KitListRelationFilter)
+  @IsOptional()
+  @Field(() => KitListRelationFilter, {
+    nullable: true,
+  })
+  kits?: KitListRelationFilter;
 
   @ApiProperty({
     required: false,

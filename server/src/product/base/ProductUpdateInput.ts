@@ -19,6 +19,7 @@ import {
 } from "class-validator";
 import { DiscountUpdateManyWithoutProductsInput } from "./DiscountUpdateManyWithoutProductsInput";
 import { Type } from "class-transformer";
+import { KitUpdateManyWithoutProductsInput } from "./KitUpdateManyWithoutProductsInput";
 import { OrderUpdateManyWithoutProductsInput } from "./OrderUpdateManyWithoutProductsInput";
 @InputType()
 class ProductUpdateInput {
@@ -55,6 +56,18 @@ class ProductUpdateInput {
     nullable: true,
   })
   itemPrice?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => KitUpdateManyWithoutProductsInput,
+  })
+  @ValidateNested()
+  @Type(() => KitUpdateManyWithoutProductsInput)
+  @IsOptional()
+  @Field(() => KitUpdateManyWithoutProductsInput, {
+    nullable: true,
+  })
+  kits?: KitUpdateManyWithoutProductsInput;
 
   @ApiProperty({
     required: false,
