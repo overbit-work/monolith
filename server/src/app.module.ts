@@ -9,6 +9,8 @@ import { ProductModule } from "./product/product.module";
 import { InvoiceModule } from "./invoice/invoice.module";
 import { ShipmentModule } from "./shipment/shipment.module";
 import { DiscountModule } from "./discount/discount.module";
+import { TeamModule } from "./team/team.module";
+import { CompanyModule } from "./company/company.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -29,6 +31,8 @@ import { GraphQLModule } from "@nestjs/graphql";
     InvoiceModule,
     ShipmentModule,
     DiscountModule,
+    TeamModule,
+    CompanyModule,
     ACLModule,
     AuthModule,
     HealthModule,

@@ -15,6 +15,8 @@ model User {
   lastName  String?
   password  String
   roles     Json
+  team      Team?      @relation(fields: [teamId], references: [id])
+  teamId    String?
   updatedAt DateTime   @updatedAt
   username  String     @unique
 }
@@ -51,6 +53,8 @@ model Address {
   address_1 String?
   address_2 String?
   city      String?
+  company   Company?   @relation(fields: [companyId], references: [id])
+  companyId String?
   createdAt DateTime   @default(now())
   customers Customer[]
   id        String     @id @default(cuid())
@@ -95,4 +99,22 @@ model Discount {
   product    Product[]
   updatedAt  DateTime  @updatedAt
   user       User[]
+}
+
+model Team {
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model Company {
+  addresses Address[]
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  name      String?
+  teams     Team[]
+  updatedAt DateTime  @updatedAt
 }

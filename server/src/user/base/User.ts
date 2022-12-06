@@ -22,6 +22,7 @@ import { Type } from "class-transformer";
 import { Discount } from "../../discount/base/Discount";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { Team } from "../../team/base/Team";
 @ObjectType()
 class User {
   @ApiProperty({
@@ -77,6 +78,15 @@ class User {
   @IsJSON()
   @Field(() => GraphQLJSON)
   roles!: JsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => Team,
+  })
+  @ValidateNested()
+  @Type(() => Team)
+  @IsOptional()
+  team?: Team | null;
 
   @ApiProperty({
     required: true,

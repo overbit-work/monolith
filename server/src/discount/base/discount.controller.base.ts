@@ -301,6 +301,13 @@ export class DiscountControllerBase {
         id: true,
         lastName: true,
         roles: true,
+
+        team: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
         username: true,
       },

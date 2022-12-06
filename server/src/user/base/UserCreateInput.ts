@@ -16,6 +16,7 @@ import { ValidateNested, IsOptional, IsString, IsJSON } from "class-validator";
 import { Type } from "class-transformer";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { TeamWhereUniqueInput } from "../../team/base/TeamWhereUniqueInput";
 @InputType()
 class UserCreateInput {
   @ApiProperty({
@@ -66,6 +67,18 @@ class UserCreateInput {
   @IsJSON()
   @Field(() => GraphQLJSON)
   roles!: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => TeamWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => TeamWhereUniqueInput)
+  @IsOptional()
+  @Field(() => TeamWhereUniqueInput, {
+    nullable: true,
+  })
+  team?: TeamWhereUniqueInput | null;
 
   @ApiProperty({
     required: true,

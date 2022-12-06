@@ -27,6 +27,7 @@ import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
 import { DiscountFindManyArgs } from "../../discount/base/DiscountFindManyArgs";
 import { Discount } from "../../discount/base/Discount";
+import { Team } from "../../team/base/Team";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -92,7 +93,15 @@ export class UserResolverBase {
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        team: args.data.team
+          ? {
+              connect: args.data.team,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -107,7 +116,15 @@ export class UserResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          team: args.data.team
+            ? {
+                connect: args.data.team,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -156,5 +173,21 @@ export class UserResolverBase {
     }
 
     return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Team, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Team",
+    action: "read",
+    possession: "any",
+  })
+  async team(@graphql.Parent() parent: User): Promise<Team | null> {
+    const result = await this.service.getTeam(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

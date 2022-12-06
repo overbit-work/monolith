@@ -37,6 +37,14 @@ import { DiscountList } from "./discount/DiscountList";
 import { DiscountCreate } from "./discount/DiscountCreate";
 import { DiscountEdit } from "./discount/DiscountEdit";
 import { DiscountShow } from "./discount/DiscountShow";
+import { TeamList } from "./team/TeamList";
+import { TeamCreate } from "./team/TeamCreate";
+import { TeamEdit } from "./team/TeamEdit";
+import { TeamShow } from "./team/TeamShow";
+import { CompanyList } from "./company/CompanyList";
+import { CompanyCreate } from "./company/CompanyCreate";
+import { CompanyEdit } from "./company/CompanyEdit";
+import { CompanyShow } from "./company/CompanyShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -118,6 +126,20 @@ const App = (): React.ReactElement => {
           edit={DiscountEdit}
           create={DiscountCreate}
           show={DiscountShow}
+        />
+        <Resource
+          name="Team"
+          list={TeamList}
+          edit={TeamEdit}
+          create={TeamCreate}
+          show={TeamShow}
+        />
+        <Resource
+          name="Company"
+          list={CompanyList}
+          edit={CompanyEdit}
+          create={CompanyCreate}
+          show={CompanyShow}
         />
       </Admin>
     </div>

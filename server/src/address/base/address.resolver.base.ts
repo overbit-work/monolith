@@ -27,6 +27,7 @@ import { AddressFindUniqueArgs } from "./AddressFindUniqueArgs";
 import { Address } from "./Address";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
+import { Company } from "../../company/base/Company";
 import { AddressService } from "../address.service";
 
 @graphql.Resolver(() => Address)
@@ -98,7 +99,15 @@ export class AddressResolverBase {
   ): Promise<Address> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        company: args.data.company
+          ? {
+              connect: args.data.company,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -115,7 +124,15 @@ export class AddressResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          company: args.data.company
+            ? {
+                connect: args.data.company,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -166,5 +183,21 @@ export class AddressResolverBase {
     }
 
     return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Company, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Company",
+    action: "read",
+    possession: "any",
+  })
+  async company(@graphql.Parent() parent: Address): Promise<Company | null> {
+    const result = await this.service.getCompany(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }
