@@ -49,11 +49,26 @@ export class AddressControllerBase {
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: AddressCreateInput): Promise<Address> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        company: data.company
+          ? {
+              connect: data.company,
+            }
+          : undefined,
+      },
       select: {
         address_1: true,
         address_2: true,
         city: true,
+
+        company: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         state: true,
@@ -81,6 +96,13 @@ export class AddressControllerBase {
         address_1: true,
         address_2: true,
         city: true,
+
+        company: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         state: true,
@@ -109,6 +131,13 @@ export class AddressControllerBase {
         address_1: true,
         address_2: true,
         city: true,
+
+        company: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         state: true,
@@ -141,11 +170,26 @@ export class AddressControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          company: data.company
+            ? {
+                connect: data.company,
+              }
+            : undefined,
+        },
         select: {
           address_1: true,
           address_2: true,
           city: true,
+
+          company: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           state: true,
@@ -182,6 +226,13 @@ export class AddressControllerBase {
           address_1: true,
           address_2: true,
           city: true,
+
+          company: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           state: true,

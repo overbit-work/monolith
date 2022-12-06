@@ -1,5 +1,6 @@
 import { Discount } from "../discount/Discount";
 import { JsonValue } from "type-fest";
+import { Team } from "../team/Team";
 
 export type User = {
   createdAt: Date;
@@ -8,6 +9,7 @@ export type User = {
   id: string;
   lastName: string | null;
   roles: JsonValue;
+  team?: Team | null;
   updatedAt: Date;
   username: string;
 };

@@ -49,13 +49,28 @@ export class UserControllerBase {
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        team: data.team
+          ? {
+              connect: data.team,
+            }
+          : undefined,
+      },
       select: {
         createdAt: true,
         firstName: true,
         id: true,
         lastName: true,
         roles: true,
+
+        team: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
         username: true,
       },
@@ -82,6 +97,13 @@ export class UserControllerBase {
         id: true,
         lastName: true,
         roles: true,
+
+        team: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
         username: true,
       },
@@ -109,6 +131,13 @@ export class UserControllerBase {
         id: true,
         lastName: true,
         roles: true,
+
+        team: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
         username: true,
       },
@@ -138,13 +167,28 @@ export class UserControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          team: data.team
+            ? {
+                connect: data.team,
+              }
+            : undefined,
+        },
         select: {
           createdAt: true,
           firstName: true,
           id: true,
           lastName: true,
           roles: true,
+
+          team: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
           username: true,
         },
@@ -180,6 +224,13 @@ export class UserControllerBase {
           id: true,
           lastName: true,
           roles: true,
+
+          team: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
           username: true,
         },

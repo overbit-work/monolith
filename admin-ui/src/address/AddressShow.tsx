@@ -5,13 +5,14 @@ import {
   SimpleShowLayout,
   ShowProps,
   TextField,
+  ReferenceField,
   DateField,
   ReferenceManyField,
   Datagrid,
-  ReferenceField,
 } from "react-admin";
 
 import { ADDRESS_TITLE_FIELD } from "./AddressTitle";
+import { COMPANY_TITLE_FIELD } from "../company/CompanyTitle";
 
 export const AddressShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -20,6 +21,9 @@ export const AddressShow = (props: ShowProps): React.ReactElement => {
         <TextField label="Address 1" source="address_1" />
         <TextField label="Address 2" source="address_2" />
         <TextField label="City" source="city" />
+        <ReferenceField label="Company" source="company.id" reference="Company">
+          <TextField source={COMPANY_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="State" source="state" />
