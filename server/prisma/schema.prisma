@@ -93,11 +93,12 @@ model Shipment {
 }
 
 model Discount {
-  createdAt  DateTime  @default(now())
-  id         String    @id @default(cuid())
+  createdAt  DateTime    @default(now())
+  id         String      @id @default(cuid())
   Percentage Float?
   product    Product[]
-  updatedAt  DateTime  @updatedAt
+  promotions Promotion[]
+  updatedAt  DateTime    @updatedAt
   user       User[]
 }
 
@@ -117,4 +118,15 @@ model Company {
   name      String?
   teams     Team[]
   updatedAt DateTime  @updatedAt
+}
+
+model Promotion {
+  createdAt  DateTime  @default(now())
+  discount   Discount? @relation(fields: [discountId], references: [id])
+  discountId String?
+  endDate    DateTime?
+  id         String    @id @default(cuid())
+  name       String?
+  startDate  DateTime?
+  updatedAt  DateTime  @updatedAt
 }

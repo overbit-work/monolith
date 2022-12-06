@@ -30,6 +30,9 @@ import { Discount } from "./Discount";
 import { ProductFindManyArgs } from "../../product/base/ProductFindManyArgs";
 import { Product } from "../../product/base/Product";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { PromotionFindManyArgs } from "../../promotion/base/PromotionFindManyArgs";
+import { Promotion } from "../../promotion/base/Promotion";
+import { PromotionWhereUniqueInput } from "../../promotion/base/PromotionWhereUniqueInput";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -270,6 +273,111 @@ export class DiscountControllerBase {
   ): Promise<void> {
     const data = {
       product: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "Promotion",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/promotions")
+  @ApiNestedQuery(PromotionFindManyArgs)
+  async findManyPromotions(
+    @common.Req() request: Request,
+    @common.Param() params: DiscountWhereUniqueInput
+  ): Promise<Promotion[]> {
+    const query = plainToClass(PromotionFindManyArgs, request.query);
+    const results = await this.service.findPromotions(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+
+        discount: {
+          select: {
+            id: true,
+          },
+        },
+
+        endDate: true,
+        id: true,
+        name: true,
+        startDate: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Discount",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/promotions")
+  async connectPromotions(
+    @common.Param() params: DiscountWhereUniqueInput,
+    @common.Body() body: PromotionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      promotions: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Discount",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/promotions")
+  async updatePromotions(
+    @common.Param() params: DiscountWhereUniqueInput,
+    @common.Body() body: PromotionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      promotions: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Discount",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/promotions")
+  async disconnectPromotions(
+    @common.Param() params: DiscountWhereUniqueInput,
+    @common.Body() body: PromotionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      promotions: {
         disconnect: body,
       },
     };

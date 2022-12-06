@@ -45,6 +45,10 @@ import { CompanyList } from "./company/CompanyList";
 import { CompanyCreate } from "./company/CompanyCreate";
 import { CompanyEdit } from "./company/CompanyEdit";
 import { CompanyShow } from "./company/CompanyShow";
+import { PromotionList } from "./promotion/PromotionList";
+import { PromotionCreate } from "./promotion/PromotionCreate";
+import { PromotionEdit } from "./promotion/PromotionEdit";
+import { PromotionShow } from "./promotion/PromotionShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -140,6 +144,13 @@ const App = (): React.ReactElement => {
           edit={CompanyEdit}
           create={CompanyCreate}
           show={CompanyShow}
+        />
+        <Resource
+          name="Promotion"
+          list={PromotionList}
+          edit={PromotionEdit}
+          create={PromotionCreate}
+          show={PromotionShow}
         />
       </Admin>
     </div>

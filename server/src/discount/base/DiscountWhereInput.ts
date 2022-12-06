@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { ProductListRelationFilter } from "../../product/base/ProductListRelationFilter";
+import { PromotionListRelationFilter } from "../../promotion/base/PromotionListRelationFilter";
 import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
 @InputType()
 class DiscountWhereInput {
@@ -52,6 +53,18 @@ class DiscountWhereInput {
     nullable: true,
   })
   product?: ProductListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PromotionListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => PromotionListRelationFilter)
+  @IsOptional()
+  @Field(() => PromotionListRelationFilter, {
+    nullable: true,
+  })
+  promotions?: PromotionListRelationFilter;
 
   @ApiProperty({
     required: false,

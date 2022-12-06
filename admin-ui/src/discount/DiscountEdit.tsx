@@ -10,6 +10,7 @@ import {
 } from "react-admin";
 
 import { ProductTitle } from "../product/ProductTitle";
+import { PromotionTitle } from "../promotion/PromotionTitle";
 import { UserTitle } from "../user/UserTitle";
 
 export const DiscountEdit = (props: EditProps): React.ReactElement => {
@@ -24,6 +25,14 @@ export const DiscountEdit = (props: EditProps): React.ReactElement => {
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
           <SelectArrayInput optionText={ProductTitle} />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
+          source="promotions"
+          reference="Promotion"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={PromotionTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
           source="user"

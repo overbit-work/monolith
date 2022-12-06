@@ -11,19 +11,11 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsDate,
-  IsString,
-  IsNumber,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
+import { IsDate, ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { Product } from "../../product/base/Product";
-import { Promotion } from "../../promotion/base/Promotion";
-import { User } from "../../user/base/User";
+import { Discount } from "../../discount/base/Discount";
 @ObjectType()
-class Discount {
+class Promotion {
   @ApiProperty({
     required: true,
   })
@@ -31,6 +23,26 @@ class Discount {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => Discount,
+  })
+  @ValidateNested()
+  @Type(() => Discount)
+  @IsOptional()
+  discount?: Discount | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  endDate!: Date | null;
 
   @ApiProperty({
     required: true,
@@ -42,32 +54,25 @@ class Discount {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: String,
   })
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  @Field(() => Number, {
+  @Field(() => String, {
     nullable: true,
   })
-  Percentage!: number | null;
+  name!: string | null;
 
   @ApiProperty({
     required: false,
-    type: () => [Product],
   })
-  @ValidateNested()
-  @Type(() => Product)
+  @IsDate()
+  @Type(() => Date)
   @IsOptional()
-  product?: Array<Product>;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Promotion],
+  @Field(() => Date, {
+    nullable: true,
   })
-  @ValidateNested()
-  @Type(() => Promotion)
-  @IsOptional()
-  promotions?: Array<Promotion>;
+  startDate!: Date | null;
 
   @ApiProperty({
     required: true,
@@ -76,14 +81,5 @@ class Discount {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => [User],
-  })
-  @ValidateNested()
-  @Type(() => User)
-  @IsOptional()
-  user?: Array<User>;
 }
-export { Discount };
+export { Promotion };

@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Discount, Product, User } from "@prisma/client";
+import { Prisma, Discount, Product, Promotion, User } from "@prisma/client";
 
 export class DiscountServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -56,6 +56,17 @@ export class DiscountServiceBase {
         where: { id: parentId },
       })
       .product(args);
+  }
+
+  async findPromotions(
+    parentId: string,
+    args: Prisma.PromotionFindManyArgs
+  ): Promise<Promotion[]> {
+    return this.prisma.discount
+      .findUnique({
+        where: { id: parentId },
+      })
+      .promotions(args);
   }
 
   async findUser(
