@@ -30,6 +30,9 @@ import { Product } from "./Product";
 import { DiscountFindManyArgs } from "../../discount/base/DiscountFindManyArgs";
 import { Discount } from "../../discount/base/Discount";
 import { DiscountWhereUniqueInput } from "../../discount/base/DiscountWhereUniqueInput";
+import { KitFindManyArgs } from "../../kit/base/KitFindManyArgs";
+import { Kit } from "../../kit/base/Kit";
+import { KitWhereUniqueInput } from "../../kit/base/KitWhereUniqueInput";
 import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
 import { Order } from "../../order/base/Order";
 import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
@@ -278,6 +281,101 @@ export class ProductControllerBase {
   ): Promise<void> {
     const data = {
       discounts: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "Kit",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/kits")
+  @ApiNestedQuery(KitFindManyArgs)
+  async findManyKits(
+    @common.Req() request: Request,
+    @common.Param() params: ProductWhereUniqueInput
+  ): Promise<Kit[]> {
+    const query = plainToClass(KitFindManyArgs, request.query);
+    const results = await this.service.findKits(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Product",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/kits")
+  async connectKits(
+    @common.Param() params: ProductWhereUniqueInput,
+    @common.Body() body: KitWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      kits: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Product",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/kits")
+  async updateKits(
+    @common.Param() params: ProductWhereUniqueInput,
+    @common.Body() body: KitWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      kits: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Product",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/kits")
+  async disconnectKits(
+    @common.Param() params: ProductWhereUniqueInput,
+    @common.Body() body: KitWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      kits: {
         disconnect: body,
       },
     };

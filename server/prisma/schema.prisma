@@ -69,6 +69,7 @@ model Product {
   discounts   Discount[]
   id          String     @id @default(cuid())
   itemPrice   Float?
+  kits        Kit[]
   name        String?
   orders      Order[]
   updatedAt   DateTime   @updatedAt
@@ -93,11 +94,12 @@ model Shipment {
 }
 
 model Discount {
-  createdAt  DateTime  @default(now())
-  id         String    @id @default(cuid())
+  createdAt  DateTime    @default(now())
+  id         String      @id @default(cuid())
   Percentage Float?
   product    Product[]
-  updatedAt  DateTime  @updatedAt
+  promotions Promotion[]
+  updatedAt  DateTime    @updatedAt
   user       User[]
 }
 
@@ -116,5 +118,23 @@ model Company {
   id        String    @id @default(cuid())
   name      String?
   teams     Team[]
+  updatedAt DateTime  @updatedAt
+}
+
+model Promotion {
+  createdAt  DateTime  @default(now())
+  discount   Discount? @relation(fields: [discountId], references: [id])
+  discountId String?
+  endDate    DateTime?
+  id         String    @id @default(cuid())
+  name       String?
+  startDate  DateTime?
+  updatedAt  DateTime  @updatedAt
+}
+
+model Kit {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  product   Product[]
   updatedAt DateTime  @updatedAt
 }

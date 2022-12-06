@@ -19,6 +19,7 @@ import {
 } from "class-validator";
 import { DiscountCreateNestedManyWithoutProductsInput } from "./DiscountCreateNestedManyWithoutProductsInput";
 import { Type } from "class-transformer";
+import { KitCreateNestedManyWithoutProductsInput } from "./KitCreateNestedManyWithoutProductsInput";
 import { OrderCreateNestedManyWithoutProductsInput } from "./OrderCreateNestedManyWithoutProductsInput";
 @InputType()
 class ProductCreateInput {
@@ -55,6 +56,18 @@ class ProductCreateInput {
     nullable: true,
   })
   itemPrice?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => KitCreateNestedManyWithoutProductsInput,
+  })
+  @ValidateNested()
+  @Type(() => KitCreateNestedManyWithoutProductsInput)
+  @IsOptional()
+  @Field(() => KitCreateNestedManyWithoutProductsInput, {
+    nullable: true,
+  })
+  kits?: KitCreateNestedManyWithoutProductsInput;
 
   @ApiProperty({
     required: false,

@@ -20,6 +20,7 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Product } from "../../product/base/Product";
+import { Promotion } from "../../promotion/base/Promotion";
 import { User } from "../../user/base/User";
 @ObjectType()
 class Discount {
@@ -58,6 +59,15 @@ class Discount {
   @Type(() => Product)
   @IsOptional()
   product?: Array<Product>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Promotion],
+  })
+  @ValidateNested()
+  @Type(() => Promotion)
+  @IsOptional()
+  promotions?: Array<Promotion>;
 
   @ApiProperty({
     required: true,

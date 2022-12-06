@@ -27,6 +27,8 @@ import { ProductFindUniqueArgs } from "./ProductFindUniqueArgs";
 import { Product } from "./Product";
 import { DiscountFindManyArgs } from "../../discount/base/DiscountFindManyArgs";
 import { Discount } from "../../discount/base/Discount";
+import { KitFindManyArgs } from "../../kit/base/KitFindManyArgs";
+import { Kit } from "../../kit/base/Kit";
 import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
 import { Order } from "../../order/base/Order";
 import { ProductService } from "../product.service";
@@ -162,6 +164,26 @@ export class ProductResolverBase {
     @graphql.Args() args: DiscountFindManyArgs
   ): Promise<Discount[]> {
     const results = await this.service.findDiscounts(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Kit])
+  @nestAccessControl.UseRoles({
+    resource: "Kit",
+    action: "read",
+    possession: "any",
+  })
+  async kits(
+    @graphql.Parent() parent: Product,
+    @graphql.Args() args: KitFindManyArgs
+  ): Promise<Kit[]> {
+    const results = await this.service.findKits(parent.id, args);
 
     if (!results) {
       return [];

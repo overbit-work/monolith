@@ -27,6 +27,8 @@ import { DiscountFindUniqueArgs } from "./DiscountFindUniqueArgs";
 import { Discount } from "./Discount";
 import { ProductFindManyArgs } from "../../product/base/ProductFindManyArgs";
 import { Product } from "../../product/base/Product";
+import { PromotionFindManyArgs } from "../../promotion/base/PromotionFindManyArgs";
+import { Promotion } from "../../promotion/base/Promotion";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { DiscountService } from "../discount.service";
@@ -162,6 +164,26 @@ export class DiscountResolverBase {
     @graphql.Args() args: ProductFindManyArgs
   ): Promise<Product[]> {
     const results = await this.service.findProduct(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Promotion])
+  @nestAccessControl.UseRoles({
+    resource: "Promotion",
+    action: "read",
+    possession: "any",
+  })
+  async promotions(
+    @graphql.Parent() parent: Discount,
+    @graphql.Args() args: PromotionFindManyArgs
+  ): Promise<Promotion[]> {
+    const results = await this.service.findPromotions(parent.id, args);
 
     if (!results) {
       return [];

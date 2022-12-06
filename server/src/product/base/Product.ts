@@ -20,6 +20,7 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Discount } from "../../discount/base/Discount";
+import { Kit } from "../../kit/base/Kit";
 import { Order } from "../../order/base/Order";
 @ObjectType()
 class Product {
@@ -69,6 +70,15 @@ class Product {
     nullable: true,
   })
   itemPrice!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Kit],
+  })
+  @ValidateNested()
+  @Type(() => Kit)
+  @IsOptional()
+  kits?: Array<Kit>;
 
   @ApiProperty({
     required: false,
