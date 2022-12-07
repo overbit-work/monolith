@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsOptional, ValidateNested } from "class-validator";
 import { ProductCreateNestedManyWithoutDiscountsInput } from "./ProductCreateNestedManyWithoutDiscountsInput";
 import { Type } from "class-transformer";
+import { PromotionCreateNestedManyWithoutDiscountsInput } from "./PromotionCreateNestedManyWithoutDiscountsInput";
 import { UserCreateNestedManyWithoutDiscountsInput } from "./UserCreateNestedManyWithoutDiscountsInput";
 @InputType()
 class DiscountCreateInput {
@@ -39,6 +40,18 @@ class DiscountCreateInput {
     nullable: true,
   })
   product?: ProductCreateNestedManyWithoutDiscountsInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => PromotionCreateNestedManyWithoutDiscountsInput,
+  })
+  @ValidateNested()
+  @Type(() => PromotionCreateNestedManyWithoutDiscountsInput)
+  @IsOptional()
+  @Field(() => PromotionCreateNestedManyWithoutDiscountsInput, {
+    nullable: true,
+  })
+  promotions?: PromotionCreateNestedManyWithoutDiscountsInput;
 
   @ApiProperty({
     required: false,

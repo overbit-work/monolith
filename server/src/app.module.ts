@@ -11,6 +11,7 @@ import { ShipmentModule } from "./shipment/shipment.module";
 import { DiscountModule } from "./discount/discount.module";
 import { TeamModule } from "./team/team.module";
 import { CompanyModule } from "./company/company.module";
+import { PromotionModule } from "./promotion/promotion.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -33,6 +34,7 @@ import { GraphQLModule } from "@nestjs/graphql";
     DiscountModule,
     TeamModule,
     CompanyModule,
+    PromotionModule,
     ACLModule,
     AuthModule,
     HealthModule,
