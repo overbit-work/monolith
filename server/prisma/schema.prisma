@@ -69,6 +69,7 @@ model Product {
   discounts   Discount[]
   id          String     @id @default(cuid())
   itemPrice   Float?
+  kits        Kit[]
   name        String?
   orders      Order[]
   updatedAt   DateTime   @updatedAt
@@ -129,4 +130,11 @@ model Promotion {
   name       String?
   startDate  DateTime?
   updatedAt  DateTime  @updatedAt
+}
+
+model Kit {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  product   Product[]
+  updatedAt DateTime  @updatedAt
 }
