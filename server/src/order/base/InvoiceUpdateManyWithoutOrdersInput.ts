@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { InvoiceWhereUniqueInput } from "../../invoice/base/InvoiceWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class InvoiceUpdateManyWithoutOrdersInput {
   @Field(() => [InvoiceWhereUniqueInput], {
@@ -41,4 +42,5 @@ class InvoiceUpdateManyWithoutOrdersInput {
   })
   set?: Array<InvoiceWhereUniqueInput>;
 }
+
 export { InvoiceUpdateManyWithoutOrdersInput };

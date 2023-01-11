@@ -15,6 +15,7 @@ import { Address } from "../../address/base/Address";
 import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { Team } from "../../team/base/Team";
+
 @ObjectType()
 class Company {
   @ApiProperty({
@@ -70,4 +71,5 @@ class Company {
   @Field(() => Date)
   updatedAt!: Date;
 }
+
 export { Company };

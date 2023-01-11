@@ -9,7 +9,7 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "nestjs-prisma";
+import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, User, Discount, Team } from "@prisma/client";
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
@@ -77,7 +77,7 @@ export class UserServiceBase {
     args: Prisma.DiscountFindManyArgs
   ): Promise<Discount[]> {
     return this.prisma.user
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .discounts(args);

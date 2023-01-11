@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ShipmentWhereUniqueInput } from "../../shipment/base/ShipmentWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class ShipmentUpdateManyWithoutOrdersInput {
   @Field(() => [ShipmentWhereUniqueInput], {
@@ -41,4 +42,5 @@ class ShipmentUpdateManyWithoutOrdersInput {
   })
   set?: Array<ShipmentWhereUniqueInput>;
 }
+
 export { ShipmentUpdateManyWithoutOrdersInput };

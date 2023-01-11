@@ -23,6 +23,7 @@ import { Discount } from "../../discount/base/Discount";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { Team } from "../../team/base/Team";
+
 @ObjectType()
 class User {
   @ApiProperty({
@@ -104,4 +105,5 @@ class User {
   @Field(() => String)
   username!: string;
 }
+
 export { User };

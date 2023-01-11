@@ -16,6 +16,7 @@ import { ProductCreateNestedManyWithoutDiscountsInput } from "./ProductCreateNes
 import { Type } from "class-transformer";
 import { PromotionCreateNestedManyWithoutDiscountsInput } from "./PromotionCreateNestedManyWithoutDiscountsInput";
 import { UserCreateNestedManyWithoutDiscountsInput } from "./UserCreateNestedManyWithoutDiscountsInput";
+
 @InputType()
 class DiscountCreateInput {
   @ApiProperty({
@@ -65,4 +66,5 @@ class DiscountCreateInput {
   })
   user?: UserCreateNestedManyWithoutDiscountsInput;
 }
+
 export { DiscountCreateInput };

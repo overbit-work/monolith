@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class AddressCreateNestedManyWithoutCompaniesInput {
   @Field(() => [AddressWhereUniqueInput], {
@@ -23,4 +24,5 @@ class AddressCreateNestedManyWithoutCompaniesInput {
   })
   connect?: Array<AddressWhereUniqueInput>;
 }
+
 export { AddressCreateNestedManyWithoutCompaniesInput };

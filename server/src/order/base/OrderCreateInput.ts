@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { InvoiceCreateNestedManyWithoutOrdersInput } from "./InvoiceCreateNestedManyWithoutOrdersInput";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { ShipmentCreateNestedManyWithoutOrdersInput } from "./ShipmentCreateNestedManyWithoutOrdersInput";
+
 @InputType()
 class OrderCreateInput {
   @ApiProperty({
@@ -100,4 +101,5 @@ class OrderCreateInput {
   })
   totalPrice?: number | null;
 }
+
 export { OrderCreateInput };

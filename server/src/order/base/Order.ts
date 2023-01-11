@@ -24,6 +24,7 @@ import { Customer } from "../../customer/base/Customer";
 import { Invoice } from "../../invoice/base/Invoice";
 import { Product } from "../../product/base/Product";
 import { Shipment } from "../../shipment/base/Shipment";
+
 @ObjectType()
 class Order {
   @ApiProperty({
@@ -119,4 +120,5 @@ class Order {
   @Field(() => Date)
   updatedAt!: Date;
 }
+
 export { Order };

@@ -15,6 +15,7 @@ import { AddressUpdateManyWithoutCompaniesInput } from "./AddressUpdateManyWitho
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { TeamUpdateManyWithoutCompaniesInput } from "./TeamUpdateManyWithoutCompaniesInput";
+
 @InputType()
 class CompanyUpdateInput {
   @ApiProperty({
@@ -52,4 +53,5 @@ class CompanyUpdateInput {
   })
   teams?: TeamUpdateManyWithoutCompaniesInput;
 }
+
 export { CompanyUpdateInput };

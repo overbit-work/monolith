@@ -15,6 +15,7 @@ import { CompanyWhereUniqueInput } from "../../company/base/CompanyWhereUniqueIn
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { UserCreateNestedManyWithoutTeamsInput } from "./UserCreateNestedManyWithoutTeamsInput";
+
 @InputType()
 class TeamCreateInput {
   @ApiProperty({
@@ -41,4 +42,5 @@ class TeamCreateInput {
   })
   users?: UserCreateNestedManyWithoutTeamsInput;
 }
+
 export { TeamCreateInput };

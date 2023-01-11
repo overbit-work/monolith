@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ProductUpdateManyWithoutKitsInput } from "./ProductUpdateManyWithoutKitsInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class KitUpdateInput {
   @ApiProperty({
@@ -28,4 +29,5 @@ class KitUpdateInput {
   })
   product?: ProductUpdateManyWithoutKitsInput;
 }
+
 export { KitUpdateInput };

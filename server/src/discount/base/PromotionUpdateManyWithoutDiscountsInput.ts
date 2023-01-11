@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { PromotionWhereUniqueInput } from "../../promotion/base/PromotionWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class PromotionUpdateManyWithoutDiscountsInput {
   @Field(() => [PromotionWhereUniqueInput], {
@@ -41,4 +42,5 @@ class PromotionUpdateManyWithoutDiscountsInput {
   })
   set?: Array<PromotionWhereUniqueInput>;
 }
+
 export { PromotionUpdateManyWithoutDiscountsInput };

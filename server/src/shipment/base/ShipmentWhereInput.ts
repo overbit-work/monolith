@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+
 @InputType()
 class ShipmentWhereInput {
   @ApiProperty({
@@ -75,4 +76,5 @@ class ShipmentWhereInput {
   })
   waybillNumber?: StringNullableFilter;
 }
+
 export { ShipmentWhereInput };

@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { DiscountWhereUniqueInput } from "../../discount/base/DiscountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class PromotionUpdateInput {
   @ApiProperty({
@@ -61,4 +62,5 @@ class PromotionUpdateInput {
   })
   startDate?: Date | null;
 }
+
 export { PromotionUpdateInput };

@@ -16,6 +16,7 @@ import { ProductUpdateManyWithoutDiscountsInput } from "./ProductUpdateManyWitho
 import { Type } from "class-transformer";
 import { PromotionUpdateManyWithoutDiscountsInput } from "./PromotionUpdateManyWithoutDiscountsInput";
 import { UserUpdateManyWithoutDiscountsInput } from "./UserUpdateManyWithoutDiscountsInput";
+
 @InputType()
 class DiscountUpdateInput {
   @ApiProperty({
@@ -65,4 +66,5 @@ class DiscountUpdateInput {
   })
   user?: UserUpdateManyWithoutDiscountsInput;
 }
+
 export { DiscountUpdateInput };

@@ -15,6 +15,7 @@ import { IsString, IsOptional, ValidateNested, IsInt } from "class-validator";
 import { CompanyWhereUniqueInput } from "../../company/base/CompanyWhereUniqueInput";
 import { Type } from "class-transformer";
 import { CustomerCreateNestedManyWithoutAddressesInput } from "./CustomerCreateNestedManyWithoutAddressesInput";
+
 @InputType()
 class AddressCreateInput {
   @ApiProperty({
@@ -96,4 +97,5 @@ class AddressCreateInput {
   })
   zip?: number | null;
 }
+
 export { AddressCreateInput };
