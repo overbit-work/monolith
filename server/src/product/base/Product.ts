@@ -22,6 +22,7 @@ import { Type } from "class-transformer";
 import { Discount } from "../../discount/base/Discount";
 import { Kit } from "../../kit/base/Kit";
 import { Order } from "../../order/base/Order";
+
 @ObjectType()
 class Product {
   @ApiProperty({
@@ -108,4 +109,5 @@ class Product {
   @Field(() => Date)
   updatedAt!: Date;
 }
+
 export { Product };

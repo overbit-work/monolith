@@ -22,6 +22,7 @@ import { Type } from "class-transformer";
 import { Product } from "../../product/base/Product";
 import { Promotion } from "../../promotion/base/Promotion";
 import { User } from "../../user/base/User";
+
 @ObjectType()
 class Discount {
   @ApiProperty({
@@ -86,4 +87,5 @@ class Discount {
   @IsOptional()
   user?: Array<User>;
 }
+
 export { Discount };

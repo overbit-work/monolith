@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { TeamWhereUniqueInput } from "../../team/base/TeamWhereUniqueInput";
+
 @InputType()
 class UserUpdateInput {
   @ApiProperty({
@@ -97,4 +98,5 @@ class UserUpdateInput {
   })
   username?: string;
 }
+
 export { UserUpdateInput };

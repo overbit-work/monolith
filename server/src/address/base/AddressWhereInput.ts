@@ -18,6 +18,7 @@ import { CompanyWhereUniqueInput } from "../../company/base/CompanyWhereUniqueIn
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
+
 @InputType()
 class AddressWhereInput {
   @ApiProperty({
@@ -110,4 +111,5 @@ class AddressWhereInput {
   })
   zip?: IntNullableFilter;
 }
+
 export { AddressWhereInput };

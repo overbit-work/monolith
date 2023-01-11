@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { TeamListRelationFilter } from "../../team/base/TeamListRelationFilter";
+
 @InputType()
 class CompanyWhereInput {
   @ApiProperty({
@@ -65,4 +66,5 @@ class CompanyWhereInput {
   })
   teams?: TeamListRelationFilter;
 }
+
 export { CompanyWhereInput };

@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { OrderCreateNestedManyWithoutInvoicesInput } from "./OrderCreateNestedManyWithoutInvoicesInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class InvoiceCreateInput {
   @ApiProperty({
@@ -28,4 +29,5 @@ class InvoiceCreateInput {
   })
   order?: OrderCreateNestedManyWithoutInvoicesInput;
 }
+
 export { InvoiceCreateInput };

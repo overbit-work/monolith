@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { TeamWhereUniqueInput } from "../../team/base/TeamWhereUniqueInput";
+
 @InputType()
 class UserWhereInput {
   @ApiProperty({
@@ -87,4 +88,5 @@ class UserWhereInput {
   })
   username?: StringFilter;
 }
+
 export { UserWhereInput };

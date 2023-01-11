@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { InvoiceUpdateManyWithoutOrdersInput } from "./InvoiceUpdateManyWithoutOrdersInput";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { ShipmentUpdateManyWithoutOrdersInput } from "./ShipmentUpdateManyWithoutOrdersInput";
+
 @InputType()
 class OrderUpdateInput {
   @ApiProperty({
@@ -100,4 +101,5 @@ class OrderUpdateInput {
   })
   totalPrice?: number | null;
 }
+
 export { OrderUpdateInput };

@@ -15,6 +15,7 @@ import { AddressCreateNestedManyWithoutCompaniesInput } from "./AddressCreateNes
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { TeamCreateNestedManyWithoutCompaniesInput } from "./TeamCreateNestedManyWithoutCompaniesInput";
+
 @InputType()
 class CompanyCreateInput {
   @ApiProperty({
@@ -52,4 +53,5 @@ class CompanyCreateInput {
   })
   teams?: TeamCreateNestedManyWithoutCompaniesInput;
 }
+
 export { CompanyCreateInput };

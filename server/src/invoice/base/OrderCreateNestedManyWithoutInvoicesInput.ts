@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class OrderCreateNestedManyWithoutInvoicesInput {
   @Field(() => [OrderWhereUniqueInput], {
@@ -23,4 +24,5 @@ class OrderCreateNestedManyWithoutInvoicesInput {
   })
   connect?: Array<OrderWhereUniqueInput>;
 }
+
 export { OrderCreateNestedManyWithoutInvoicesInput };

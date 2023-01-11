@@ -15,6 +15,7 @@ import { Company } from "../../company/base/Company";
 import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { User } from "../../user/base/User";
+
 @ObjectType()
 class Team {
   @ApiProperty({
@@ -59,4 +60,5 @@ class Team {
   @IsOptional()
   users?: Array<User>;
 }
+
 export { Team };

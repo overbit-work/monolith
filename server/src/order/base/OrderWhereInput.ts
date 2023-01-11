@@ -20,6 +20,7 @@ import { InvoiceListRelationFilter } from "../../invoice/base/InvoiceListRelatio
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { ShipmentListRelationFilter } from "../../shipment/base/ShipmentListRelationFilter";
+
 @InputType()
 class OrderWhereInput {
   @ApiProperty({
@@ -114,4 +115,5 @@ class OrderWhereInput {
   })
   totalPrice?: IntNullableFilter;
 }
+
 export { OrderWhereInput };

@@ -16,6 +16,7 @@ import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
 import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
+
 @InputType()
 class TeamWhereInput {
   @ApiProperty({
@@ -53,4 +54,5 @@ class TeamWhereInput {
   })
   users?: UserListRelationFilter;
 }
+
 export { TeamWhereInput };

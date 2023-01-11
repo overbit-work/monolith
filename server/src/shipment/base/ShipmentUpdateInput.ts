@@ -19,6 +19,7 @@ import {
   IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class ShipmentUpdateInput {
   @ApiProperty({
@@ -66,4 +67,5 @@ class ShipmentUpdateInput {
   })
   waybillNumber?: string | null;
 }
+
 export { ShipmentUpdateInput };

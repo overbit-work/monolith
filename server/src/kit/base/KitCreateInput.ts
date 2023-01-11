@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ProductCreateNestedManyWithoutKitsInput } from "./ProductCreateNestedManyWithoutKitsInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class KitCreateInput {
   @ApiProperty({
@@ -28,4 +29,5 @@ class KitCreateInput {
   })
   product?: ProductCreateNestedManyWithoutKitsInput;
 }
+
 export { KitCreateInput };

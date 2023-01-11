@@ -18,6 +18,7 @@ import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { ProductListRelationFilter } from "../../product/base/ProductListRelationFilter";
 import { PromotionListRelationFilter } from "../../promotion/base/PromotionListRelationFilter";
 import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
+
 @InputType()
 class DiscountWhereInput {
   @ApiProperty({
@@ -78,4 +79,5 @@ class DiscountWhereInput {
   })
   user?: UserListRelationFilter;
 }
+
 export { DiscountWhereInput };

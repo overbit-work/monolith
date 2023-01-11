@@ -9,7 +9,7 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "nestjs-prisma";
+import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, Invoice, Order } from "@prisma/client";
 
 export class InvoiceServiceBase {
@@ -52,7 +52,7 @@ export class InvoiceServiceBase {
     args: Prisma.OrderFindManyArgs
   ): Promise<Order[]> {
     return this.prisma.invoice
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .order(args);

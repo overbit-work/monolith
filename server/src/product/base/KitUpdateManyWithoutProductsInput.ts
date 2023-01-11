@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { KitWhereUniqueInput } from "../../kit/base/KitWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class KitUpdateManyWithoutProductsInput {
   @Field(() => [KitWhereUniqueInput], {
@@ -41,4 +42,5 @@ class KitUpdateManyWithoutProductsInput {
   })
   set?: Array<KitWhereUniqueInput>;
 }
+
 export { KitUpdateManyWithoutProductsInput };

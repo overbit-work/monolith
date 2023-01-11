@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { TeamWhereUniqueInput } from "../../team/base/TeamWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
+
 @InputType()
 class TeamCreateNestedManyWithoutCompaniesInput {
   @Field(() => [TeamWhereUniqueInput], {
@@ -23,4 +24,5 @@ class TeamCreateNestedManyWithoutCompaniesInput {
   })
   connect?: Array<TeamWhereUniqueInput>;
 }
+
 export { TeamCreateNestedManyWithoutCompaniesInput };

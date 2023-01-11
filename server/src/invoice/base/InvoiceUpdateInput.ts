@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { OrderUpdateManyWithoutInvoicesInput } from "./OrderUpdateManyWithoutInvoicesInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+
 @InputType()
 class InvoiceUpdateInput {
   @ApiProperty({
@@ -28,4 +29,5 @@ class InvoiceUpdateInput {
   })
   order?: OrderUpdateManyWithoutInvoicesInput;
 }
+
 export { InvoiceUpdateInput };

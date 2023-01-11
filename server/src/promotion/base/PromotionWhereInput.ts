@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+
 @InputType()
 class PromotionWhereInput {
   @ApiProperty({
@@ -75,4 +76,5 @@ class PromotionWhereInput {
   })
   startDate?: DateTimeNullableFilter;
 }
+
 export { PromotionWhereInput };

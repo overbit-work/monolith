@@ -15,6 +15,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+
 @InputType()
 class InvoiceWhereInput {
   @ApiProperty({
@@ -40,4 +41,5 @@ class InvoiceWhereInput {
   })
   order?: OrderListRelationFilter;
 }
+
 export { InvoiceWhereInput };

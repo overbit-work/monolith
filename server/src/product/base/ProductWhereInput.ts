@@ -19,6 +19,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { KitListRelationFilter } from "../../kit/base/KitListRelationFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+
 @InputType()
 class ProductWhereInput {
   @ApiProperty({
@@ -101,4 +102,5 @@ class ProductWhereInput {
   })
   orders?: OrderListRelationFilter;
 }
+
 export { ProductWhereInput };

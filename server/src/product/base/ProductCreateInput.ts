@@ -21,6 +21,7 @@ import { DiscountCreateNestedManyWithoutProductsInput } from "./DiscountCreateNe
 import { Type } from "class-transformer";
 import { KitCreateNestedManyWithoutProductsInput } from "./KitCreateNestedManyWithoutProductsInput";
 import { OrderCreateNestedManyWithoutProductsInput } from "./OrderCreateNestedManyWithoutProductsInput";
+
 @InputType()
 class ProductCreateInput {
   @ApiProperty({
@@ -92,4 +93,5 @@ class ProductCreateInput {
   })
   orders?: OrderCreateNestedManyWithoutProductsInput;
 }
+
 export { ProductCreateInput };

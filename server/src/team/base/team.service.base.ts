@@ -9,7 +9,7 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "nestjs-prisma";
+import { PrismaService } from "../../prisma/prisma.service";
 import { Prisma, Team, User, Company } from "@prisma/client";
 
 export class TeamServiceBase {
@@ -52,7 +52,7 @@ export class TeamServiceBase {
     args: Prisma.UserFindManyArgs
   ): Promise<User[]> {
     return this.prisma.team
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .users(args);

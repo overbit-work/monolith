@@ -21,6 +21,7 @@ import { DiscountUpdateManyWithoutProductsInput } from "./DiscountUpdateManyWith
 import { Type } from "class-transformer";
 import { KitUpdateManyWithoutProductsInput } from "./KitUpdateManyWithoutProductsInput";
 import { OrderUpdateManyWithoutProductsInput } from "./OrderUpdateManyWithoutProductsInput";
+
 @InputType()
 class ProductUpdateInput {
   @ApiProperty({
@@ -92,4 +93,5 @@ class ProductUpdateInput {
   })
   orders?: OrderUpdateManyWithoutProductsInput;
 }
+
 export { ProductUpdateInput };
